@@ -31,7 +31,7 @@ exports.findBestCoupon = (user, cart) => {
     if (coupon.endDate && new Date(coupon.endDate) < now) continue;
 
     // -------- Check Usage Limit Per User --------
-    const key = `${user.userId}|${coupon.code}`;
+    const key = `${user.userId}|${coupon.code}`; // unique key for user+coupon
     const used = usageTracker[key] || 0;
     if (coupon.usageLimitPerUser && used >= coupon.usageLimitPerUser) continue;
 
