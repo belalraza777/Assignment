@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const couponRoutes = require("./routes/couponRoutes");
 const bestCouponRoutes = require("./routes/bestCouponRoutes");
+const applyCouponRoutes = require("./routes/applyCouponRoutes");
 const coupons = require("./data/coupons");
 const users = require("./data/users");
 const { demoUser, demoCoupons } = require("./demoData/demoData");
@@ -19,9 +20,10 @@ app.use(express.urlencoded({ extended: true }));
 // Map routes to URL paths
 app.use("/coupons", couponRoutes);          // Create + List coupons
 app.use("/best-coupon", bestCouponRoutes);  // Get best coupon for user+cart
+app.use("/apply-coupon", applyCouponRoutes); // Apply coupon and track usage
 
 // Root health endpoint
-app.get('/', (req, res) => res.json({ status: 'ok' }));
+app.get('/', (req, res) => res.status(200).json({ status: 'ok' }));
 
 // Start Server
 app.listen(5000, () => {
