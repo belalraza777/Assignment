@@ -20,7 +20,6 @@ app.use(express.urlencoded({ extended: true }));
 // Map routes to URL paths
 app.use("/coupons", couponRoutes);          // Create + List coupons
 app.use("/best-coupon", bestCouponRoutes);  // Get best coupon for user+cart
-app.use("/apply-coupon", applyCouponRoutes); // Apply coupon and track usage
 
 // Root health endpoint
 app.get('/', (req, res) => res.status(200).json({ status: 'ok' }));
