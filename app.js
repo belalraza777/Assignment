@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const couponRoutes = require("./routes/couponRoutes");
 const bestCouponRoutes = require("./routes/bestCouponRoutes");
-const applyCouponRoutes = require("./routes/applyCouponRoutes");
 const coupons = require("./data/coupons");
 const users = require("./data/users");
 const { demoUser, demoCoupons } = require("./demoData/demoData");
