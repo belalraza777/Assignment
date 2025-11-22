@@ -91,5 +91,12 @@ const coupon5 = {
 // ---------------------------
 module.exports = {
   demoUser,
-  demoCoupons: [coupon1, coupon2, coupon3, coupon4, coupon5]
+  demoCoupons: [coupon1, coupon2, coupon3, coupon4, coupon5],
+ 
+  demoCart: {
+    items: [
+      { productId: "p-elec-1", category: "electronics", unitPrice: 2000, quantity: 1 },
+      { productId: "p-book-1", category: "books", unitPrice: 400, quantity: 2 }
+    ]
+  }
 };

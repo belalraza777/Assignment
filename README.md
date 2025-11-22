@@ -1,6 +1,36 @@
 
 # 🚀 Coupon Management System
 
+### **C. Demo Cart (Seeded)**
+
+This demo cart (exported as `demoCart` in `demoData/demoData.js`) is auto-seeded with the demo user and coupons:
+
+```json
+{
+  "user": {
+    "userId": "demo-001",
+    "userTier": "NEW",
+    "country": "IN",
+    "lifetimeSpend": 0,
+    "ordersPlaced": 0
+  },
+  "cart": {
+    "items": [
+      { "productId": "p-elec-1", "category": "electronics", "unitPrice": 2000, "quantity": 1 },
+      { "productId": "p-book-1", "category": "books", "unitPrice": 400, "quantity": 2 }
+    ]
+  }
+}
+```
+
+Expected Best Coupon: `CLEANCART20` with discount `300` (20% of 2800 capped at 300).
+
+Test Quickly (PowerShell):
+```powershell
+curl -Method POST http://localhost:5000/best-coupon -Headers @{"Content-Type"="application/json"} -Body '{"user":{"userId":"demo-001","userTier":"NEW","country":"IN","lifetimeSpend":0,"ordersPlaced":0},"cart":{"items":[{"productId":"p-elec-1","category":"electronics","unitPrice":2000,"quantity":1},{"productId":"p-book-1","category":"books","unitPrice":400,"quantity":2}]}}'
+```
+
+
 A simple backend service built using **Node.js + Express.js** that allows creating coupons and finding the **best applicable coupon** for a user based on their profile and cart details.
 This project is designed according to the **Cognifyz Assignment – Coupon Management** requirements.
 
