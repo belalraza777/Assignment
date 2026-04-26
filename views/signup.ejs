@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signup</title>
+  <style>
+    body {
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(140deg, #f4f9ff, #eef7f2);
+      padding: 16px;
+    }
+    .panel {
+      width: min(420px, 100%);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+      border: 1px solid #e6edf7;
+    }
+    h2 {
+      margin: 0 0 8px;
+      color: #1f2a37;
+      letter-spacing: 0.3px;
+    }
+    form {
+      margin-top: 10px;
+    }
+    input, button {
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 8px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+    input {
+      border: 1px solid #d4deea;
+      background: #fbfdff;
+    }
+    input:focus {
+      outline: none;
+      border-color: #2f6fed;
+      box-shadow: 0 0 0 3px rgba(47, 111, 237, 0.12);
+    }
+    button {
+      border: none;
+      background: #2f6fed;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button:hover {
+      background: #2459be;
+    }
+    #msg {
+      min-height: 20px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+    a {
+      color: #2459be;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h2>Signup</h2>
+
+    <form id="signupForm">
+      <input type="text" name="username" placeholder="Username" required minlength="3" />
+      <input type="email" name="email" placeholder="Email" required />
+      <input type="password" name="password" placeholder="Password" required minlength="6" />
+      <button type="submit">Create Account</button>
+    </form>
+
+    <p id="msg"></p>
+    <p><a href="/login">Already have account? Login</a></p>
+  </main>
+
+  <script>
+    const form = document.getElementById("signupForm");
+    const msg = document.getElementById("msg");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      msg.textContent = "";
+
+      const payload = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        msg.style.color = "red";
+        msg.textContent = data.message || (data.errors && data.errors.join(", ")) || "Signup failed";
+        return;
+      }
+
+      msg.style.color = "green";
+      msg.textContent = "Signup success";
+      window.location.href = "/profile";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile</title>
+  <style>
+    body {
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(140deg, #f4f9ff, #eef7f2);
+      padding: 16px;
+    }
+    .panel {
+      width: min(540px, 100%);
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+      border: 1px solid #e6edf7;
+    }
+    h2 {
+      margin: 0 0 10px;
+      color: #1f2a37;
+      letter-spacing: 0.3px;
+    }
+    .card {
+      border: 1px solid #dbe5f2;
+      border-radius: 10px;
+      padding: 14px 16px;
+      background: #fbfdff;
+    }
+    .card p {
+      margin: 8px 0;
+      color: #263141;
+    }
+    .actions {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button, a {
+      display: inline-block;
+      padding: 9px 12px;
+      text-decoration: none;
+      border: 0;
+      background: #2f6fed;
+      border-radius: 9px;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    button:hover, a:hover {
+      background: #2459be;
+    }
+    #logoutBtn {
+      background: #d13b4f;
+    }
+    #logoutBtn:hover {
+      background: #b62f41;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <h2>Profile</h2>
+    <div class="card">
+      <p><strong>ID:</strong> <%= user._id %></p>
+      <p><strong>Username:</strong> <%= user.username %></p>
+      <p><strong>Email:</strong> <%= user.email %></p>
+    </div>
+
+    <div class="actions">
+      <button id="logoutBtn">Logout</button>
+      <a href="/login">Back to Login</a>
+    </div>
+  </main>
+
+  <script>
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await fetch("/api/auth/logout", { method: "GET" });
+      window.location.href = "/login";
+    });
+  </script>
+</body>
+</html>
